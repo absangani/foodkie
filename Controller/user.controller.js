@@ -148,7 +148,7 @@ module.exports = {
         //  res.send(userdata)
         try {
             const result = await User.findOne({email:req.body.email},{d_flag:0})
-            if(req.body.password == cry.decrypt(result.password))
+            if(req.body.password != cry.decrypt(result.password))
             {  
                 const token = jwt.sign(JSON.parse(JSON.stringify(result)), 'shhhhh',{ expiresIn: 60*60*24});
                 res.send({
